@@ -1,0 +1,38 @@
+
+<div class="container mt-5" style="max-width: 500px;">
+  <div class="card shadow-sm border-0 rounded-3">
+    <div class="card-body p-4">
+
+      <%# En-tête : Case à cocher interactive + Titre %>
+      <div class="d-flex align-items-center mb-3">
+        <%= form_with model: @task, class: "d-flex align-items-center me-3" do |f| %>
+          <%= f.check_box :completed,
+                          class: "form-check-input mt-0",
+                          style: "width: 22px; height: 22px; cursor: pointer;",
+                          onchange: "this.form.requestSubmit()" %>
+        <% end %>
+
+        <h2 class="card-title fw-bold mb-0 <%= @task.completed ? 'text-decoration-line-through text-muted' : 'text-dark' %>">
+          <%= @task.title %>
+        </h2>
+      </div>
+
+      <%# Encadré pour les détails de la tâche %>
+      <div class="p-3 mb-4 bg-light border rounded text-secondary">
+        <%= @task.details.present? ? @task.details : "No details provided for this task." %>
+      </div>
+
+      <%# Barre d'actions en bas de carte %>
+      <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+        <%= link_to :tasks, class: "text-decoration-none text-secondary fw-medium back-link" do %>
+          <i class="fa-solid fa-arrow-left me-1"></i> Back to list
+        <% end %>
+
+        <%= link_to edit_task_path(@task), class: "btn btn-outline-primary fw-semibold px-4" do %>
+          <i class="fa-solid fa-pen-to-square me-1"></i> UPDATE
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

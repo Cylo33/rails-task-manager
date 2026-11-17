@@ -1,0 +1,25 @@
+
+<div class="container mt-5" style="max-width: 500px;">
+  <h1 class="mb-4 fw-bold text-uppercase">MY TASKS</h1>
+
+  <ul class="list-unstyled">
+    <% @tasks.each do |task| %>
+      <li class="task-item d-flex align-items-center justify-content-between p-3 mb-2 border rounded bg-light">
+
+        <div class="d-flex align-items-center">
+          <input class="form-check-input me-3 mt-0" type="checkbox" value="" id="task_<%= task.id %>" <%= "checked" if task.completed %>>
+          <%= link_to task.title, task_path(task), class: "task-title text-decoration-none text-dark fw-medium" %>
+        </div>
+
+        <%= link_to task_path(task),
+                class: "text-danger delete-icon",
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+          <i class="fa-solid fa-trash-can"></i>
+        <% end %>
+
+      </li>
+    <% end %>
+  </ul>
+
+  <%= link_to "CREATE", :new_task, class: "btn btn-primary w-100 mt-3 py-2 fw-semibold" %>
+</div>
